@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:ordering_app/homepage.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ordering_app/cubits/homepage_cubit.dart';
+import 'package:ordering_app/views/homepage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,12 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: const HomePage());
+    return MultiBlocProvider(
+      providers: [BlocProvider(create: (context) => HomePageCubit())],
+      child: MaterialApp(
+          title: 'Flutter Demo',
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primarySwatch: Colors.orange,
+          ),
+          home: const HomePage()),
+    );
   }
 }
