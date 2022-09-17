@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   void initState() {
     super.initState();
@@ -23,10 +24,24 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        key: scaffoldKey,
         appBar: AppBar(
           leadingWidth: 42,
           toolbarHeight: 62,
           backgroundColor: Colors.orange,
+          leading: IconButton(
+              icon: Icon(Icons.menu),
+              color: Colors.white,
+              iconSize: 30,
+              onPressed: () {
+                if (scaffoldKey.currentState!.isDrawerOpen) {
+                  scaffoldKey.currentState!.closeDrawer();
+                  //close drawer, if drawer is open
+                } else {
+                  scaffoldKey.currentState!.openDrawer();
+                  //open drawer, if drawer is closed
+                }
+              }),
           title: const Text(
             "Yemek Perileri",
             style: TextStyle(fontSize: 23, fontStyle: FontStyle.italic, color: Colors.white),
@@ -86,6 +101,119 @@ class _HomePageState extends State<HomePage> {
               return Center();
             }
           }),
+        ),
+        drawer: Drawer(
+          child: SingleChildScrollView(
+              child: Container(
+            child: Column(
+              children: [
+                MyHeaderDrawer(),
+                Padding(
+                  padding: const EdgeInsets.only(top: 20),
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.favorite_outline_sharp,
+                      size: 30,
+                    ),
+                    iconColor: Colors.orange,
+                    title: const Text(
+                      'Favoriler',
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    onTap: () {},
+                  ),
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.paste_sharp,
+                    size: 30,
+                  ),
+                  iconColor: Colors.orange,
+                  title: const Text(
+                    'Önceki Siparişler',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.location_on,
+                    size: 30,
+                  ),
+                  iconColor: Colors.orange,
+                  title: const Text(
+                    'Adresler',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.playlist_add_check_circle_outlined,
+                    size: 30,
+                  ),
+                  iconColor: Colors.orange,
+                  title: const Text(
+                    'Kuponlar',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.credit_score_outlined,
+                    size: 30,
+                  ),
+                  iconColor: Colors.orange,
+                  title: const Text(
+                    'Ödeme',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.help_rounded,
+                    size: 30,
+                  ),
+                  iconColor: Colors.orange,
+                  title: const Text(
+                    'Yardım',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  onTap: () {},
+                ),
+                Divider(
+                  height: 30,
+                  thickness: 3,
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.settings,
+                    size: 30,
+                  ),
+                  iconColor: Colors.orange,
+                  title: const Text(
+                    'Ayarlar',
+                    style: TextStyle(fontSize: 16),
+                  ),
+                  onTap: () {},
+                ),
+                ListTile(
+                  leading: Icon(
+                    Icons.exit_to_app,
+                    size: 30,
+                  ),
+                  iconColor: Colors.orange,
+                  title: const Text(
+                    'Çıkış Yap',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  onTap: () {},
+                ),
+              ],
+            ),
+          )),
         ));
   }
 }
