@@ -22,6 +22,7 @@ class FoodsDaoRepository {
   }
 
   Future<List<BasketFoods>> sepettekiYemekleriGetir(String kullanici_adi) async {
+    //Map'in değer kısmı string olur http den dolayı...
     //post
     var url = Uri.parse("http://kasimadalan.pe.hu/yemekler/sepettekiYemekleriGetir.php");
     var data = {"kullanici_adi": kullanici_adi};

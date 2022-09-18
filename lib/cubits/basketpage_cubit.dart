@@ -11,4 +11,8 @@ class BasketPageCubit extends Cubit {
     var liste = await frepo.sepettekiYemekleriGetir(kullanici_adi);
     emit(liste);
   }
+
+  Future<void> yemekSil(int sepet_yemek_id, String kullanici_adi) async {
+    await sepettekiYemekleriYukle(kullanici_adi);
+  }
 }

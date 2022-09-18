@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ordering_app/cubits/basketpage_cubit.dart';
-import 'package:ordering_app/entity/basket_foods.dart';
 
 class ShoppingBasketPage extends StatefulWidget {
   const ShoppingBasketPage({super.key});
