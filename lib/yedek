@@ -1,0 +1,52 @@
+
+*********Sepete tüm yemekleri getir için sepetsayfa denemem***********
+
+BlocBuilder<BasketPageCubit, List<BasketFoods>>(
+        builder: (context, yemeklerListesi) {
+          if (yemeklerListesi.isNotEmpty) {
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: yemeklerListesi.length,
+                    itemBuilder: (context, index) {
+                      var yemek = yemeklerListesi[index];
+
+                      return Card(
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text("foto"),
+                            ),
+                            Container(),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text("${yemek.yemek_siparis_adet} Adet ${yemek.yemek_adi}"),
+                                  ],
+                                ),
+                                Container(
+                                  height: 40,
+                                ),
+                                Text("Toplam Fiyat: ${int.parse(yemek.yemek_fiyat) * int.parse(yemek.yemek_siparis_adet)} ₺")
+                              ],
+                            ),
+                            Spacer(),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 12.0),
+                              child: ElevatedButton(onPressed: () {}, child: Text("Sil")),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            );
+          } else {}
+        },
+      )
