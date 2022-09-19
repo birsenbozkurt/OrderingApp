@@ -50,3 +50,25 @@ BlocBuilder<BasketPageCubit, List<BasketFoods>>(
           } else {}
         },
       )
+
+********************** Food Detail Page***********
+
+          // BlocBuilder<BasketPageCubit, List<BasketFoods>>(builder: ((context, yemeklerListesi) {
+            //   return ElevatedButton(
+            //       onPressed: () {
+            //         for (var i = 0; i < yemeklerListesi.length; i++) {
+            //           if (widget.yemek.yemek_adi == yemeklerListesi[i].yemek_adi) {
+            //             click = 0;
+            //             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            //               duration: Duration(seconds: 1),
+            //               content: Text("Ürün Sepette"),
+            //             ));
+            //             return;
+            //           }
+            //         }
+            //         if(click==1){
+            //           context.read<FoodDetailCubit>().
+            //         }
+            //       },
+            //       child: child);
+            // }))
