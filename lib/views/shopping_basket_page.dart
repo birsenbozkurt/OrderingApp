@@ -20,12 +20,20 @@ class _ShoppingBasketPageState extends State<ShoppingBasketPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios_new_sharp),
+            color: Colors.white,
+            iconSize: 30,
+            onPressed: () {
+              Navigator.pop(context);
+            }),
         title: const Text("Sepetim",
             style: TextStyle(
               fontSize: 23,
               fontStyle: FontStyle.italic,
               color: Colors.white,
             )),
+        centerTitle: true,
         backgroundColor: Colors.orange,
       ),
       body: Center(),

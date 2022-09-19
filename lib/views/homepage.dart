@@ -1,3 +1,4 @@
+import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ordering_app/cubits/homepage_cubit.dart';
@@ -22,6 +23,7 @@ class _HomePageState extends State<HomePage> {
     context.read<HomePageCubit>().yemekleriYukle();
   }
 
+  TextEditingController textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,62 +70,87 @@ class _HomePageState extends State<HomePage> {
         body: BlocBuilder<HomePageCubit, List<Foods>>(
           builder: ((context, yemeklerListesi) {
             if (yemeklerListesi.isNotEmpty) {
-              return ListView.builder(
-                itemCount: yemeklerListesi.length,
-                itemBuilder: (context, indeks) {
-                  var yemek = yemeklerListesi[indeks];
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => FoodDetailPage(yemek: yemek))).then((value) {
-                        context.read<HomePageCubit>().yemekleriYukle();
-                      });
-                    },
-                    child: Card(
-                      color: Colors.grey.shade300,
-                      shape: BeveledRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                          side: BorderSide(
-                            color: Colors.orange.shade700,
-                            width: 2.0,
-                          )),
-                      margin: EdgeInsets.only(top: 10, left: 10, right: 10),
-                      child: Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(bottom: 60),
-                            child: Icon(
-                              CupertinoIcons.pin_fill,
-                              size: 27,
-                              color: Colors.black87,
+              return Column(
+                children: [
+                  Image.asset(
+                    "assets/images/foods.jpg",
+                    width: 500,
+                    height: 200,
+                  ),
+                  AnimSearchBar(
+                    width: 400,
+                    textController: textController,
+                    onSuffixTap: () {},
+                    helpText: "Ne Yemek İstersiniz ?",
+                    style: TextStyle(fontStyle: FontStyle.italic),
+                  ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: yemeklerListesi.length,
+                      itemBuilder: (context, indeks) {
+                        var yemek = yemeklerListesi[indeks];
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => FoodDetailPage(yemek: yemek))).then((value) {
+                              context.read<HomePageCubit>().yemekleriYukle();
+                            });
+                          },
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                Card(
+                                  color: Colors.grey.shade300,
+                                  shape: BeveledRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      side: BorderSide(
+                                        color: Colors.orange.shade700,
+                                        width: 2.0,
+                                      )),
+                                  margin: EdgeInsets.only(top: 10, left: 10, right: 10),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(bottom: 60),
+                                        child: Icon(
+                                          CupertinoIcons.pin_fill,
+                                          size: 27,
+                                          color: Colors.black87,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Image.network(
+                                          "http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}",
+                                          width: 80,
+                                          height: 80,
+                                        ),
+                                      ),
+                                      Container(),
+                                      Text(
+                                        "${yemek.yemek_adi} - ${yemek.yemek_fiyat} TL",
+                                        style:
+                                            TextStyle(fontSize: 18, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold, color: Colors.black54),
+                                      ),
+                                      Spacer(),
+                                      Padding(
+                                        padding: const EdgeInsets.only(right: 12.0),
+                                        child: Icon(
+                                          CupertinoIcons.hand_point_right_fill,
+                                          size: 30,
+                                          color: Colors.black26,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.network(
-                              "http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}",
-                              width: 80,
-                              height: 80,
-                            ),
-                          ),
-                          Container(),
-                          Text(
-                            "${yemek.yemek_adi} - ${yemek.yemek_fiyat} TL",
-                            style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold, color: Colors.black54),
-                          ),
-                          Spacer(),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 12.0),
-                            child: Icon(
-                              CupertinoIcons.hand_point_right_fill,
-                              size: 30,
-                              color: Colors.black26,
-                            ),
-                          )
-                        ],
-                      ),
+                        );
+                      },
                     ),
-                  );
-                },
+                  ),
+                ],
               );
             } else {
               return Center();
