@@ -13,7 +13,7 @@ class _ShoppingBasketPageState extends State<ShoppingBasketPage> {
   @override
   void initState() {
     super.initState();
-    context.read<BasketPageCubit>().sepettekiYemekleriYukle("BirsenBozkurt");
+    // context.read<BasketPageCubit>().sepettekiYemekleriYukle("BirsenBozkurt");
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:ordering_app/cubits/homepage_cubit.dart';
 import 'package:ordering_app/entity/foods.dart';
@@ -78,18 +79,45 @@ class _HomePageState extends State<HomePage> {
                       });
                     },
                     child: Card(
+                      color: Colors.grey.shade300,
+                      shape: BeveledRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                          side: BorderSide(
+                            color: Colors.orange.shade700,
+                            width: 2.0,
+                          )),
+                      margin: EdgeInsets.only(top: 10, left: 10, right: 10),
                       child: Row(
                         children: [
                           Padding(
+                            padding: const EdgeInsets.only(bottom: 60),
+                            child: Icon(
+                              CupertinoIcons.pin_fill,
+                              size: 27,
+                              color: Colors.black87,
+                            ),
+                          ),
+                          Padding(
                             padding: const EdgeInsets.all(8.0),
-                            child: Text("foto "),
+                            child: Image.network(
+                              "http://kasimadalan.pe.hu/yemekler/resimler/${yemek.yemek_resim_adi}",
+                              width: 80,
+                              height: 80,
+                            ),
                           ),
                           Container(),
-                          Text("${yemek.yemek_adi}- ${yemek.yemek_fiyat} TL"),
+                          Text(
+                            "${yemek.yemek_adi} - ${yemek.yemek_fiyat} TL",
+                            style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold, color: Colors.black54),
+                          ),
                           Spacer(),
                           Padding(
                             padding: const EdgeInsets.only(right: 12.0),
-                            child: Icon(Icons.ads_click_outlined),
+                            child: Icon(
+                              CupertinoIcons.hand_point_right_fill,
+                              size: 30,
+                              color: Colors.black26,
+                            ),
                           )
                         ],
                       ),

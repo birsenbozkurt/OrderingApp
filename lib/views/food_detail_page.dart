@@ -21,7 +21,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   @override
   void initState() {
     super.initState();
-    context.read<BasketPageCubit>().sepettekiYemekleriYukle("BirsenBozkurt");
+    // context.read<BasketPageCubit>().sepettekiYemekleriYukle("BirsenBozkurt");
   }
 
   int yemek_siparis_adet = 1;
