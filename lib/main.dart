@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ordering_app/cubits/basketpage_cubit.dart';
+import 'package:ordering_app/cubits/food_detail_cubit.dart';
 import 'package:ordering_app/cubits/homepage_cubit.dart';
 import 'package:ordering_app/views/homepage.dart';
 
@@ -13,7 +15,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => HomePageCubit())],
+      providers: [
+        BlocProvider(create: (context) => HomePageCubit()),
+        BlocProvider(
+          create: (context) => BasketPageCubit(),
+        ),
+        BlocProvider(
+          create: (context) => FoodDetailCubit(),
+        )
+      ],
       child: MaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,

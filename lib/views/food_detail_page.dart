@@ -1,3 +1,4 @@
+// ignore_for_file:  sort_constructors_first
 // ignore_for_file: public_member_api_docs, sort_constructors_firs
 
 import 'package:flutter/cupertino.dart';
@@ -7,6 +8,7 @@ import 'package:ordering_app/cubits/basketpage_cubit.dart';
 import 'package:ordering_app/cubits/food_detail_cubit.dart';
 import 'package:ordering_app/entity/basket_foods.dart';
 import 'package:ordering_app/entity/foods.dart';
+import 'package:ordering_app/views/shopping_basket_page.dart';
 
 class FoodDetailPage extends StatefulWidget {
   Foods yemek;
@@ -22,7 +24,7 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
   @override
   void initState() {
     super.initState();
-    // context.read<BasketPageCubit>().sepettekiYemekleriYukle("BirsenBozkurt");
+    context.read<BasketPageCubit>().sepettekiYemekleriYukle("BirsenBozkurt");
   }
 
   int yemek_siparis_adet = 1;
@@ -110,7 +112,46 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                 ),
               ],
             ),
-            Container(),
+            Container(
+              height: 40,
+            ),
+            BlocBuilder<BasketPageCubit, List<BasketFoods>>(builder: (context, yemeklerListesi) {
+              return ElevatedButton(
+                  style: ElevatedButton.styleFrom(minimumSize: Size(300, 40), primary: Colors.orange.shade700),
+                  onPressed: () {
+                    for (var i = 0; i < yemeklerListesi.length; i++) {
+                      if (widget.yemek.yemek_adi == yemeklerListesi[i].yemek_adi) {
+                        click = 0;
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          duration: Duration(seconds: 1),
+                          content: Text("Bu Ürün Sepete Eklendi"),
+                        ));
+                        return;
+                      }
+                    }
+                    if (click == 1) {
+                      context.read<FoodDetailCubit>().YemekEkle(widget.yemek.yemek_adi, widget.yemek.yemek_resim_adi,
+                          int.parse(widget.yemek.yemek_fiyat), yemek_siparis_adet, "BirsenBozkurt");
+                      click--;
+
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        duration: Duration(seconds: 2),
+                        content: Text("Ürün Başarıyla Eklendi, Sepete Gitmek İster Misiniz ?"),
+                        action: SnackBarAction(
+                          label: "Evet",
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: ((context) => ShoppingBasketPage())));
+                          },
+                        ),
+                      ));
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text("Bu Ürün Zaten Sepette !"),
+                      ));
+                    }
+                  },
+                  child: Text("Sepete Ekle"));
+            }),
           ],
         ),
       ),

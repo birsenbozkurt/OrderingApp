@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ordering_app/entity/basket_foods.dart';
 import 'package:ordering_app/repository/foodsdao_repository.dart';
 
-class BasketPageCubit extends Cubit {
+class BasketPageCubit extends Cubit<List<BasketFoods>> {
   BasketPageCubit() : super(<BasketFoods>[]);
 
   var frepo = FoodsDaoRepository();
@@ -13,6 +13,7 @@ class BasketPageCubit extends Cubit {
   }
 
   Future<void> yemekSil(int sepet_yemek_id, String kullanici_adi) async {
+    await frepo.sepettenYemekSil(sepet_yemek_id, kullanici_adi);
     await sepettekiYemekleriYukle(kullanici_adi);
   }
 }
