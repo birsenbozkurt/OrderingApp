@@ -45,7 +45,7 @@ class FoodsDaoRepository {
 
   Future<void> sepettenYemekSil(int sepet_yemek_id, String kullanici_adi) async {
     var url = Uri.parse("http://kasimadalan.pe.hu/yemekler/sepettenYemekSil.php");
-    var data = {"Sepet_yemek_id": sepet_yemek_id.toString(), "kullanici_adi": kullanici_adi};
+    var data = {"sepet_yemek_id": sepet_yemek_id.toString(), "kullanici_adi": kullanici_adi};
     var response = await http.post(url, body: data);
   }
 }

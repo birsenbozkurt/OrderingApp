@@ -58,6 +58,14 @@ class _ShoppingBasketPageState extends State<ShoppingBasketPage> {
                           var yemek = yemeklerListesi[indeks];
 
                           return Card(
+                            color: Colors.grey.shade300,
+                            shape: BeveledRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                                side: BorderSide(
+                                  color: Colors.orange,
+                                  width: 2.0,
+                                )),
+                            margin: EdgeInsets.only(top: 10, left: 10, right: 10),
                             child: Row(
                               children: [
                                 Padding(
@@ -76,20 +84,21 @@ class _ShoppingBasketPageState extends State<ShoppingBasketPage> {
                                   children: [
                                     Row(
                                       children: [
-                                        Text("${yemek.yemek_siparis_adet} Adet ${yemek.yemek_adi}"),
+                                        Text("${yemek.yemek_siparis_adet} Adet ${yemek.yemek_adi}",style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold, color: Colors.black54),),
                                       ],
                                     ),
                                     Container(
                                       height: 40,
                                     ),
-                                    Text("Toplam Fiyat: ${int.parse(yemek.yemek_fiyat) * int.parse(yemek.yemek_siparis_adet)} ₺"),
+                                    Text("Toplam Fiyat: ${int.parse(yemek.yemek_fiyat) * int.parse(yemek.yemek_siparis_adet)} ₺",style: TextStyle(fontSize: 16, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold, color: Colors.black54),),
                                   ],
                                 ),
                                 Spacer(),
                                 Padding(
                                   padding: const EdgeInsets.only(right: 12.0),
                                   child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(primary: Colors.orange.shade700),
+
+                                      style: ElevatedButton.styleFrom(primary: Colors.orange,minimumSize: Size(60,50)),
                                       onPressed: () {
                                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                                           content: Text("Bu Ürünü Silmek İstediğinize Emin Misiniz?"),
@@ -126,13 +135,14 @@ class _ShoppingBasketPageState extends State<ShoppingBasketPage> {
                         height: 50,
                         color: Colors.transparent,
                         child: Text(
-                          "Sepet Toplamı: ${sepetToplami} ₺",
+                          "Sepet Toplamı: ${sepetToplami} ₺", style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic, fontWeight: FontWeight.bold, color: Colors.black54),
                         ),
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 15),
                       child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(minimumSize: Size(300, 60), primary: Colors.orange),
                           onPressed: () {
                             for (var i = 0; i < yemeklerListesi.length; i++) {
                               context.read<BasketPageCubit>().yemekSil(int.parse(yemeklerListesi[i].sepet_yemek_id), "BirsenBozkurt");
@@ -153,7 +163,7 @@ class _ShoppingBasketPageState extends State<ShoppingBasketPage> {
                                   ]);
                                 });
                           },
-                          child: Text("Sepeti Onayla")),
+                          child: Text("Sepeti Onayla",style: TextStyle(fontSize: 20,color: Colors.black ),)),
                     ),
                   ],
                 );
@@ -175,12 +185,13 @@ class _ShoppingBasketPageState extends State<ShoppingBasketPage> {
           )
         : Scaffold(
             appBar: AppBar(
+              backgroundColor: Colors.orange,
               title: Text(
                 "Sepetiniz",
-                style: TextStyle(fontFamily: 'PtBold', fontSize: 30),
+                style: TextStyle(color: Colors.white, fontSize: 30),
               ),
               centerTitle: true,
-              backgroundColor: Colors.redAccent,
+
               leading: IconButton(
                   onPressed: () {
                     Navigator.of(context).popUntil((route) => route.isFirst);

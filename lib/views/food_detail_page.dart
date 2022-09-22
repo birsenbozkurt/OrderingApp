@@ -116,8 +116,9 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
               height: 40,
             ),
             BlocBuilder<BasketPageCubit, List<BasketFoods>>(builder: (context, yemeklerListesi) {
-              return ElevatedButton(
-                  style: ElevatedButton.styleFrom(minimumSize: Size(300, 40), primary: Colors.orange.shade700),
+              return ElevatedButton.icon(
+
+                  style: ElevatedButton.styleFrom(minimumSize: Size(300, 60), primary: Colors.orange),
                   onPressed: () {
                     for (var i = 0; i < yemeklerListesi.length; i++) {
                       if (widget.yemek.yemek_adi == yemeklerListesi[i].yemek_adi) {
@@ -150,7 +151,8 @@ class _FoodDetailPageState extends State<FoodDetailPage> {
                       ));
                     }
                   },
-                  child: Text("Sepete Ekle"));
+                  icon: Icon(Icons.shopping_bag_outlined),
+                  label: Text("Sepete Ekle"));
             }),
           ],
         ),
